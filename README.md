@@ -1,60 +1,19 @@
 # Fulfillment & Meaning
 
-## Reflection workspace update
-
-The interface now opens on a task-focused Today page, with a resume link, workbook
-progress, and expandable north-star statements. Original prompt links remain valid
-and open a dedicated editor with the existing answer and source passages.
-
-- Drafts auto-save on input using the existing `fh.draft.<id>` keys. Older drafts are
-  retained. A draft stays in the open queue until explicitly marked answered.
-- Open questions can be filtered by workbook, status, and text, with 18 results at
-  a time. Save-for-later questions and all personal writing appear in My writing.
-- JSON backups contain writing, completion choices, and saved-for-later IDs.
-  Restore validates all records before importing and preserves newer local writing.
-  Markdown export remains available. Writing stays in the browser and is not synced.
-- `js/workspace.js` supplies the workspace views and persistence behavior.
-  The source content in `js/data.js` is unchanged.
-
-Validation: desktop and 390px mobile editor, reload persistence, explicit completion
-and reopening, queue draft filtering, saved-for-later, source drawer, and JSON download.
-The browser file-picker automation did not confirm a restore; restore validation and
-merge logic were reviewed. No preview test answers are part of the published files.
-
-The older interface notes below describe the initial version; the behavior above
-supersedes its draft-completion and ambient-background descriptions.
-
-A personal hub for the fulfillment / meaning discovery work — the three workbooks,
-the recurring threads, the evidence passages, the full interview, and the questions
-still open.
-
-Static HTML/CSS/JS, no build step, same family as `routine-hub/` and `goals-hub/`.
 
 ## Structure
 
 ```
 index.html        shell: header, nav, ambient scene, evidence drawer, search palette
 css/styles.css    the ENTIRE visual system — one file, on purpose
-js/workspace.js   workspace views: focus writing, drafts, pinning, backups
+js/book.js        the book: its contents, divisions and pages
+img/              the five plates (see img/README.md)
 js/data.js        GENERATED — all content as one `DATA` object
-js/app.js         base views, drawer, search palette, the ambient window
+js/app.js         the engine: data index, drafts, drawer, search palette, the window
 tools/build_data.py   regenerates js/data.js from the source documents
 server.py         local preview on http://localhost:8944
 ```
 
-## Views
-
-| Route | What it is |
-|---|---|
-| `#/horizon` | progress rings, a rotating anchor phrase, one open question to answer tonight, the six north-star statements |
-| `#/paths` | the three workbooks → sections → every prompt with its answer, status and evidence |
-| `#/threads` | constellation of the 12 recurring themes, the 10 core contradictions, the anchor phrases |
-| `#/evidence` | all 61 first-person passages (also opens as a side drawer from any `E##` chip) |
-| `#/conversation` | the full 66-question interview transcript, by session part |
-| `#/open` | the 259 prompts that are **in progress** (173 — a real answer that is missing one specific detail) or **not started** (86), filterable, each with a place to write |
-
-Deep links work: `#/paths/life/05/L05.11` opens that prompt directly.
-`/` or `⌘K` opens search across every prompt, passage and interview answer.
 
 ## Writing answers
 
@@ -102,6 +61,41 @@ Same as the other hubs — push this folder to a GitHub repo and turn on GitHub 
 is needed. Note that this hub contains a lot of personal material; a **private**
 repo, or keeping it local, is the safer default.
 
+
+## What this is
+
+**A reference book, not a workbook.** It is a source of truth to be consulted, not an
+activity to be completed. There is no dashboard and no "today" — the front door is a
+table of contents. Writing is still possible on every entry, but it is folded into a
+collapsed margin note rather than being the point of the page.
+
+## Structure
+
+| Route | |
+|---|---|
+| `#/contents` | Front matter: the title page, the table of contents, the standing count, and how to read it |
+| `#/creed` | **Book I · The Creed** — the six north-star statements and seven anchor phrases |
+| `#/paths/life` | **Book II · Life & Purpose** — 18 chapters in 7 named parts |
+| `#/paths/relationships` | **Book III · Relationships & Belonging** — 11 chapters in 4 parts |
+| `#/paths/location` | **Book IV · Place** — 11 chapters in 5 parts |
+| `#/threads` | **Book V · Patterns & Tensions** — 12 patterns grouped in 4, plus 10 contradictions |
+| `#/evidence` | **Book VI · Testimony** — 61 passages, grouped by which book they mostly support |
+| `#/conversation` | **Book VII · The Conversation** — the interview, by session part |
+| `#/open` | **Appendix A · What Remains Open** |
+| `#/writing` | **Appendix B · My Notes** — drafts, marked entries, backups |
+
+Every entry keeps its reference number (`L01.9`, `E13`) and every old deep link still
+resolves, including `#/paths/life/05/L05.11` and `#/evidence/E13`. `#/horizon` opens
+the contents.
+
+The named parts live in `PARTS` and `THEME_GROUPS` at the top of `js/book.js` — edit
+them freely, but every chapter number must appear exactly once per book.
+
+## Capitalisation
+
+Structural headings are Title Case, applied at render time by `titleCase()` in
+`js/book.js` — **not** baked into `js/data.js`. Source text is never transformed:
+questions, answers, passages and quotes appear exactly as recorded.
 
 ## The visual system
 

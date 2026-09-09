@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=glass-1">
+<link rel="stylesheet" href="css/styles.css?v=book-1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -50,12 +50,22 @@
   </div>
   <div class="wrap nav-scroll">
     <nav class="nav" id="nav">
-      <a href="#/horizon"      data-view="horizon">Horizon</a>
-      <a href="#/paths"        data-view="paths">The Three Paths</a>
-      <a href="#/threads"      data-view="threads">Threads</a>
-      <a href="#/evidence"     data-view="evidence">Evidence</a>
-      <a href="#/conversation" data-view="conversation">Conversation</a>
-      <a href="#/open"         data-view="open">Open Questions</a>
+      <a href="#/contents" data-view="contents">Contents</a>
+
+      <span class="nav-part">The Books</span>
+      <a href="#/creed"                 data-view="creed">The Creed</a>
+      <a href="#/paths/life"            data-view="paths" data-book="life">Life &amp; Purpose</a>
+      <a href="#/paths/relationships"   data-view="paths" data-book="relationships">Relationships &amp; Belonging</a>
+      <a href="#/paths/location"        data-view="paths" data-book="location">Place</a>
+
+      <span class="nav-part">Commentary</span>
+      <a href="#/threads"      data-view="threads">Patterns &amp; Tensions</a>
+      <a href="#/evidence"     data-view="evidence">Testimony</a>
+      <a href="#/conversation" data-view="conversation">The Conversation</a>
+
+      <span class="nav-part">Appendix</span>
+      <a href="#/open"    data-view="open">What Remains Open</a>
+      <a href="#/writing" data-view="writing">My Notes</a>
     </nav>
   </div>
 </header>
@@ -116,7 +126,7 @@
 </svg>
 
 <script src="js/data.js"></script>
-<script src="js/app.js?v=glass-1"></script>
-<script src="js/workspace.js?v=glass-1"></script>
+<script src="js/app.js?v=book-1"></script>
+<script src="js/book.js?v=book-1"></script>
 </body>
 </html>

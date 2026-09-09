@@ -988,5 +988,4 @@ addEventListener('resize', () => { if (location.hash.startsWith('#/threads')) dr
 addEventListener('hashchange', route);
 
 /* ================================================================ BOOT */
-// Routing/boot is handled by workspace.js; the ambient window is ours to raise.
-initScene();
+// Views, routing and boot live in js/book.js — this file is the engine.
