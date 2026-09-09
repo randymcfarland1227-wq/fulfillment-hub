@@ -106,6 +106,7 @@ document.addEventListener('change',async e=>{
 });
 function download(name,type,text){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
 document.addEventListener('click',e=>{
+ if(e.target.closest('.skip-link')){e.preventDefault();$('#main').focus();return;}
  const b=e.target.closest('button');if(!b)return;
  if(b.dataset.complete&&saveEditor(true)){route();notify('Marked answered. Your progress is updated.');}
  if(b.dataset.reopen&&saveEditor(false)){route();notify('Reopened as a draft.');}
