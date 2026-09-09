@@ -400,6 +400,8 @@ function areaView(a) {
     ${pageHead(a.realm.name, a.name, a.question)}
     <p class="depth-line"><span class="depth">${depthOf(t)}</span>${t.total ? ` · ${t.total} entries · ${t.answered} answered · ${t.partial} in progress · ${t.unanswered} not started` : ' · no chapter of its own — carried by your passages'}</p>
 
+    ${typeof alignmentPanel === 'function' ? alignmentPanel(a) : ''}
+
     ${chapters.length ? `<section class="block">
       <div class="block-head"><h2>Chapters</h2></div>
       <div class="stack">
@@ -1611,6 +1613,4 @@ $('.brand-text em').textContent = 'Reflect · Understand · Design';
 $('#footNote').innerHTML =
   `${PROMPTS.length} entries · ${DOC.evidence.length} passages · ${TX.sections.reduce((n,s) => n + s.entries.length, 0)} recorded answers · ` +
   `${PATTERN_INDEX.length} patterns tracked. <a href="#/data">Your data</a>`;
-initTheme();
-initScene();
-route();
+/* boot happens at the end of js/align.js, once the ALIGN layer is registered */

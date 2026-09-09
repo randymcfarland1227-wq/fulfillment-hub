@@ -202,3 +202,88 @@ const SESSIONS = [
   { id:'topic',    name:'Explore a Topic',  count:5,  blurb:'Five entries from one area.' },
   { id:'deep',     name:'Deep Session',     count:12, blurb:'A long sitting in one chapter.' },
 ];
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ALIGNMENT LAYER
+   Destination is what he said he needs. Current reality is what he said
+   about his life as it stands. Everything below is a *candidate* drawn
+   from his own words, offered for confirmation — never a verdict.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+const ALIGN_STATES = ['Unclear','Strongly Aligned','Aligned','Mostly Aligned','Drifting','Misaligned','Intentionally Misaligned'];
+const SEASONS = ['Exploring','Stabilizing','Building','Recovering','Transitioning','Connecting','Creating','Expanding','Reinventing'];
+const DRIFT_VERDICTS = ['Unreviewed','Accurate','Partly Accurate','Intentional','Not Relevant','Revisit Later'];
+
+/* Present-tense conditions he described. `conflicts` are the pattern ids
+   each one works against; `quote` is his literal wording. */
+const CURRENT_REALITY = [
+  { id:'housing', label:'The family house in Baltimore',
+    quote:'my current living situation withholds me from having romance or connections or friendship',
+    evidence:['E02','E03','E08'], prompts:['R03.11','C01.9'],
+    conflicts:['autonomy','peace','intimacy','belonging','beauty'], strength:'Sustained' },
+  { id:'money', label:'Unstable rent, bills and employment',
+    quote:'it’s so shaky as to like feeling confident with the rent and the bills and my stuff',
+    evidence:['E02','E06','E07'], prompts:['L09.9','C06.14'],
+    conflicts:['security','stability','adventure','autonomy'], strength:'Sustained' },
+  { id:'family', label:'Open-ended responsibility for family',
+    quote:'making decisions out of being an altruistic person of responsibility and inevitably… leading to my demise',
+    evidence:['E03','E16','E18'], prompts:['R06.15','L03.19'],
+    conflicts:['peace','autonomy','contribution'], strength:'Sustained' },
+  { id:'creative', label:'No protected space for the music',
+    quote:'I would regret never sharing it while young',
+    evidence:['E13','E15','E60'], prompts:['L08.19','L04.8'],
+    conflicts:['creativity','expression','mastery'], strength:'Emerging' },
+  { id:'work', label:'Work that does not fit',
+    quote:'seeing people who have lived their whole lives… accepting defeat',
+    evidence:['E32','E42','E05'], prompts:['C06.14','L04.7'],
+    conflicts:['mastery','expression','security'], strength:'Emerging' },
+];
+
+/* Conditions that already work. The system must never imply everything
+   needs optimising. */
+const PROTECT_SEED = [
+  { id:'taste',     label:'Trust in my own taste',            evidence:['E19','E58','E59'], areas:['identity','creativity'] },
+  { id:'system',    label:'The Wednesday money system',       evidence:['E06'],             areas:['means','lifestyle'] },
+  { id:'body',      label:'The gym habit, and what it proved',evidence:['E35','E47'],       areas:['vitality','growth'] },
+  { id:'connector', label:'Being the person who connects people', evidence:['E04','E44'],   areas:['community','belonging'] },
+  { id:'voice',     label:'The voice itself',                 evidence:['E13','E27'],       areas:['creativity','expression'] },
+  { id:'curiosity', label:'Curiosity as the compass',         evidence:['E61','E39'],       areas:['growth','identity'] },
+];
+
+/* Changes likely to move several areas at once. */
+const LEVERAGE_SEED = [
+  { id:'own-place', label:'Living alone, in my own place',
+    areas:['home','identity','creativity','vitality','romance','belonging'], evidence:['E08','E09','E46'],
+    difficulty:'High', reversibility:'Low',
+    why:'Living alone is named as a need in its own right — privacy, my own food and laundry, quiet reflection — not a stand-in for autonomy.' },
+  { id:'relocate', label:'Moving to a city that actually fits',
+    areas:['location','culture','community','adventure','work'], evidence:['E08','E30'],
+    difficulty:'High', reversibility:'Medium',
+    why:'The wish to leave Baltimore and reset appears repeatedly; which city meets the needs is still open.' },
+  { id:'income', label:'Stabilising income and restarting the money system',
+    areas:['means','home','adventure','aspirations'], evidence:['E06','E07'],
+    difficulty:'Medium', reversibility:'High',
+    why:'The Wednesday ritual is described as energising in itself, and it is what made the rest feel possible.' },
+  { id:'toolkit', label:'Protected weekly time on the musical toolkit',
+    areas:['creativity','expression','purpose'], evidence:['E60','E36'],
+    difficulty:'Low', reversibility:'High',
+    why:'The toolkit is what turns a spark into something finished, and it is the cheapest of these to start.' },
+  { id:'finite-help', label:'A finite, written limit on family help',
+    areas:['family','vitality','identity'], evidence:['E03','E16','E18'],
+    difficulty:'Medium', reversibility:'High',
+    why:'“Being more tactical with self-sacrifice” is the lesson drawn in his own words; the limit itself is still undefined.' },
+];
+
+/* Lessons he drew himself. Small on purpose. */
+const GUARDRAIL_SEED = [
+  { id:'g1', text:'Do not trade away all autonomy for stability.',                              evidence:['E08','E12'] },
+  { id:'g2', text:'Be tactical with self-sacrifice — open-ended help has cost me every time.',   evidence:['E03','E33'] },
+  { id:'g3', text:'Do not make a permanent decision to solve a temporary discomfort.',           evidence:['E39','E52'] },
+  { id:'g4', text:'Do not let fear turn into regret.',                                          evidence:['E61','E15'] },
+  { id:'g5', text:'Do not confuse being around people with belonging.',                         evidence:['E04','E56'] },
+  { id:'g6', text:'Do not stay somewhere only because leaving is intimidating.',                 evidence:['E08','E11'] },
+  { id:'g7', text:'Do not postpone happiness until the life is finished — look at the flowers.', evidence:['E48','E61'] },
+];
+
+/* Fast decision test — the needs most likely to be moved by a real choice. */
+const CHECK_NEEDS = ['autonomy','security','creativity','belonging','intimacy','beauty','adventure','peace','expression','stability'];

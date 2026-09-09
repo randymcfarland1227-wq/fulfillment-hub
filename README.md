@@ -4,7 +4,10 @@ A personal operating system for one life. Not a survey, not a workbook — a liv
 searchable, evidence-backed map that turns reflection into understanding and
 understanding into criteria for real decisions.
 
-**REFLECT → UNDERSTAND → DESIGN**
+**REFLECT → UNDERSTAND → ALIGN → DESIGN**
+
+Reflection discovers. Understanding organises. **Alignment compares it against the life as
+it actually is.** Design helps choose what comes next.
 
 ## Files
 
@@ -14,7 +17,8 @@ css/styles.css      the ENTIRE visual system — one file, on purpose
 js/data.js          GENERATED source material (376 entries, 61 passages, 66 answers)
 js/taxonomy.js      the knowledge layer — Life Map, patterns, definitions, criteria
 js/app.js           the engine — index, storage, search, derivations
-js/views.js         every page, the router, and all behaviour
+js/views.js         reflect / understand / design pages, the router, behaviour
+js/align.js         the ALIGN layer — compass, drift, corrections, guardrails; boots the app
 img/                the five plates (see img/README.md)
 tools/build_data.py regenerates js/data.js from the source Word documents
 server.py           local preview on http://localhost:8944
@@ -35,10 +39,33 @@ chapter is ever missed or double-placed.
 | **Home** | Command centre: continue, Life Map depth, strongest patterns, an open question |
 | **Reflect** | Continue (session sizes) · Life Map · Reflection Library · Open Questions |
 | **Understand** | Patterns · Tensions · Non-Negotiables · Definitions · Quotes From Me · Testimony · The Conversation · Ask My Life |
+| **Align** | Life Compass · Life Right Now · Course Corrections · Guardrails · Current Priorities · Check My Direction (+ Navigation Check, Course Review, Am I Building the Right Life?) |
 | **Design** | Ideal Life Blueprint · Decision Lab · Experiments |
 | **History** | Timeline · Then vs Now |
 
 Every old deep link still resolves: `#/paths/life/05/L05.11` → `#/entry/L05.11`.
+
+## The alignment layer
+
+The reflection system says *who you are*. The alignment layer asks *whether your current
+life reflects it* — and it can only do that because you already described your present
+circumstances in your own passages.
+
+- **Nothing is asserted.** Drift candidates come from `CURRENT_REALITY` in `js/taxonomy.js`,
+  where each present-tense condition you described is paired with the needs it works against
+  and quoted verbatim. Every one can be marked Accurate / Partly Accurate / **Intentional** /
+  Not Relevant / Revisit Later.
+- **Intentional tradeoffs are not drift.** Recorded tradeoffs render as strategy, everywhere.
+- **One bottleneck beats five problems.** The condition touching the most life areas is shown
+  as the bottleneck rather than listing its symptoms separately.
+- **Stay the Course is a real answer.** When nothing is pulling, the site says so and
+  recommends nothing.
+- **Protect** is permanent. Conditions already working are named, and a decision that would
+  cost one of them says so.
+- **The North Star is never silently rewritten.** It is derived, shown as a draft, confirmed
+  by you; if the underlying material shifts you get *Possible change detected*, not a rewrite.
+- **Depth on demand.** Every derived statement is Glance → *Why does this matter?* →
+  *Why do we think this?*
 
 ## Honesty rules the code actually enforces
 
