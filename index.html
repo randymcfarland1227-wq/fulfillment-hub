@@ -8,9 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=reflection-1">
-<link rel="stylesheet" href="css/workspace.css?v=reflection-1">
-<link rel="stylesheet" href="css/atelier.css?v=atelier-1">
+<link rel="stylesheet" href="css/styles.css?v=glass-1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -18,6 +16,8 @@
 <!-- ============================ AMBIENT SCENE ============================ -->
 <div class="scene" aria-hidden="true">
   <div class="scene-sky"></div>
+  <div class="scene-arch"></div>
+  <div class="scene-came"></div>
   <div class="scene-glow"></div>
   <canvas class="scene-motes" id="motes"></canvas>
   <div class="scene-layer scene-far"></div>
@@ -97,12 +97,16 @@
 <!-- ================================ ICONS =============================== -->
 <svg style="display:none" aria-hidden="true">
   <symbol id="i-brand" viewBox="0 0 40 40">
-    <path d="M6 34h28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    <path d="M13 34V16l5-5 5 5v18" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
-    <path d="M30 34V12l-4 3v19" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
-    <path d="M8 34c0-6 2-9 2-9s2 3 2 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
-    <circle cx="18" cy="21" r="1.4" fill="currentColor"/>
-    <circle cx="18" cy="27" r="1.4" fill="currentColor"/>
+    <!-- the window -->
+    <path d="M7 37V17a13 13 0 0 1 26 0v20Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <!-- came -->
+    <path d="M20 6v31M7 24h26" stroke="currentColor" stroke-width="1" opacity=".5"/>
+    <!-- the tower -->
+    <path d="M12.5 37V27l3.5-2.5V37" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    <!-- the tree -->
+    <path d="M26 37l-3.4-.0 3.4-8 3.4 8Z" fill="currentColor" opacity=".9"/>
+    <path d="M26 30.5l-2.4-5.5 2.4-5 2.4 5Z" fill="currentColor" opacity=".55"/>
+    <circle cx="20" cy="15" r="2.6" fill="currentColor" opacity=".8"/>
   </symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
@@ -112,7 +116,7 @@
 </svg>
 
 <script src="js/data.js"></script>
-<script src="js/app.js?v=reflection-1"></script>
-<script src="js/workspace.js?v=reflection-1"></script>
+<script src="js/app.js?v=glass-1"></script>
+<script src="js/workspace.js?v=glass-1"></script>
 </body>
 </html>

@@ -121,9 +121,9 @@ function buildLayer(el, opts) {
 }
 
 function initScene() {
-  buildLayer($('.scene-far'), { seed:8231, h:210, treeMix:.25, treeW:34, treeH:70,  bW:44, bH:150, lit:.20, tree:'var(--tree-2)', bldg:'var(--bldg)' });
-  buildLayer($('.scene-mid'), { seed:5117, h:240, treeMix:.45, treeW:46, treeH:104, bW:52, bH:126, lit:.16, tree:'var(--tree)',   bldg:'color-mix(in srgb,var(--bldg) 78%, #000)' });
-  buildLayer($('.scene-near'),{ seed:9043, h:270, treeMix:.86, treeW:66, treeH:150, bW:60, bH:96,  lit:.10, tree:'var(--tree-2)', bldg:'var(--tree)' });
+  buildLayer($('.scene-far'), { seed:8231, h:212, treeMix:.22, treeW:34, treeH:70,  bW:46, bH:158, lit:.26, tree:'var(--tree-2)', bldg:'var(--bldg)' });
+  buildLayer($('.scene-mid'), { seed:5117, h:244, treeMix:.46, treeW:48, treeH:106, bW:54, bH:130, lit:.19, tree:'var(--tree)',   bldg:'color-mix(in srgb,var(--bldg) 74%, #000)' });
+  buildLayer($('.scene-near'),{ seed:9043, h:276, treeMix:.88, treeW:68, treeH:154, bW:62, bH:98,  lit:.11, tree:'var(--tree-2)', bldg:'var(--tree)' });
 
   const c = $('#motes'), ctx = c.getContext('2d');
   let motes = [], raf = 0;
@@ -988,4 +988,5 @@ addEventListener('resize', () => { if (location.hash.startsWith('#/threads')) dr
 addEventListener('hashchange', route);
 
 /* ================================================================ BOOT */
-// Boot is handled by workspace.js after the reflection workspace is installed.
+// Routing/boot is handled by workspace.js; the ambient window is ours to raise.
+initScene();
