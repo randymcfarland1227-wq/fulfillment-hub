@@ -13,9 +13,8 @@ and open a dedicated editor with the existing answer and source passages.
 - JSON backups contain writing, completion choices, and saved-for-later IDs.
   Restore validates all records before importing and preserves newer local writing.
   Markdown export remains available. Writing stays in the browser and is not synced.
-- `js/workspace.js` supplies the new views and persistence behavior;
-  `css/workspace.css` supplies the responsive, opaque reading surfaces. The source
-  content in `js/data.js` is unchanged.
+- `js/workspace.js` supplies the workspace views and persistence behavior.
+  The source content in `js/data.js` is unchanged.
 
 Validation: desktop and 390px mobile editor, reload persistence, explicit completion
 and reopening, queue draft filtering, saved-for-later, source drawer, and JSON download.
@@ -35,9 +34,10 @@ Static HTML/CSS/JS, no build step, same family as `routine-hub/` and `goals-hub/
 
 ```
 index.html        shell: header, nav, ambient scene, evidence drawer, search palette
-css/styles.css    the whole visual system (dusk + dawn themes)
+css/styles.css    the ENTIRE visual system — one file, on purpose
+js/workspace.js   workspace views: focus writing, drafts, pinning, backups
 js/data.js        GENERATED — all content as one `DATA` object
-js/app.js         router, views, drafts, drawer, search, ambient scene
+js/app.js         base views, drawer, search palette, the ambient window
 tools/build_data.py   regenerates js/data.js from the source documents
 server.py         local preview on http://localhost:8944
 ```
@@ -101,3 +101,34 @@ Same as the other hubs — push this folder to a GitHub repo and turn on GitHub 
 (Settings → Pages → deploy from branch, root). Everything is static, so nothing else
 is needed. Note that this hub contains a lot of personal material; a **private**
 repo, or keeping it local, is the safer default.
+
+
+## The visual system
+
+One stylesheet, `css/styles.css`. It was three (`styles` + `workspace` + `atelier`)
+overriding each other, which is exactly what made the site read as incoherent —
+so they were collapsed into a single set of tokens and components. **Add new styles
+there rather than starting another layer.**
+
+The idea is a cathedral at dusk, where the city meets the forest.
+
+- **Type** — Cormorant Garamond carries display and all long-form reading (existing
+  answers, source passages, interview replies, the writing box). Inter carries the
+  interface: nav, chips, labels, buttons, metadata.
+- **Colour** — a deep ground, lead came (`--came`), gold leaf (`--leaf`, `--gold`),
+  and jewel accents. Emerald / amber / sapphire stand for Life / Relationships /
+  Location, and the same jewels drive the status pills.
+- **Glass** — the fixed backdrop is one enormous window: a skyline dissolving into
+  conifers, came laid over the sky, a cathedral arch across the top, and a scrim so
+  type never has to fight it. The anchor card carries a two-ring rose window; each
+  workbook panel is headed by diamond quarry glazing with jewel roundels.
+- **Geometry** — everything is round. `--r-xl` 30px through `--r-sm` 10px, and every
+  control is a full pill.
+- **Both themes** — `dusk` (default) and `dawn` are complete palettes. Every colour is
+  defined as a token in both; never hard-code a hex value in a component.
+
+## Status vocabulary
+
+Four states, and the wording matters: **Answered**, **In progress** (a real answer is
+already there and only needs refining — never treat these as blanks), **Not started**
+(each says exactly what it is waiting for), and **Draft saved**.
