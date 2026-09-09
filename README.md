@@ -1,5 +1,30 @@
 # Fulfillment & Meaning
 
+## Reflection workspace update
+
+The interface now opens on a task-focused Today page, with a resume link, workbook
+progress, and expandable north-star statements. Original prompt links remain valid
+and open a dedicated editor with the existing answer and source passages.
+
+- Drafts auto-save on input using the existing `fh.draft.<id>` keys. Older drafts are
+  retained. A draft stays in the open queue until explicitly marked answered.
+- Open questions can be filtered by workbook, status, and text, with 18 results at
+  a time. Save-for-later questions and all personal writing appear in My writing.
+- JSON backups contain writing, completion choices, and saved-for-later IDs.
+  Restore validates all records before importing and preserves newer local writing.
+  Markdown export remains available. Writing stays in the browser and is not synced.
+- `js/workspace.js` supplies the new views and persistence behavior;
+  `css/workspace.css` supplies the responsive, opaque reading surfaces. The source
+  content in `js/data.js` is unchanged.
+
+Validation: desktop and 390px mobile editor, reload persistence, explicit completion
+and reopening, queue draft filtering, saved-for-later, source drawer, and JSON download.
+The browser file-picker automation did not confirm a restore; restore validation and
+merge logic were reviewed. No preview test answers are part of the published files.
+
+The older interface notes below describe the initial version; the behavior above
+supersedes its draft-completion and ambient-background descriptions.
+
 A personal hub for the fulfillment / meaning discovery work — the three workbooks,
 the recurring threads, the evidence passages, the full interview, and the questions
 still open.

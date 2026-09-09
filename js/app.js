@@ -54,14 +54,14 @@ const Drafts = {
   }
 };
 
-const effStatus = p => (Drafts.text(p.id) ? 'drafted' : p.status);
-const isOpenQ   = p => p.status !== 'answered' && !Drafts.text(p.id);
+const effStatus = p => { const d = Drafts.get(p.id); return d?.complete ? 'answered' : d?.text ? 'drafted' : p.status; };
+const isOpenQ   = p => effStatus(p) !== 'answered';
 
 function tally(list) {
   const t = { answered:0, partial:0, unanswered:0, drafted:0, total:list.length };
   list.forEach(p => t[effStatus(p)]++);
-  t.done = t.answered + t.drafted;        // a prompt whose main ask is satisfied
-  t.started = t.done + t.partial;         // …plus the ones with real material already on the page
+  t.done = t.answered;
+  t.started = t.done + t.partial + t.drafted;
   return t;
 }
 
@@ -988,10 +988,4 @@ addEventListener('resize', () => { if (location.hash.startsWith('#/threads')) dr
 addEventListener('hashchange', route);
 
 /* ================================================================ BOOT */
-initTheme();
-initScene();
-buildPaletteIndex();
-$('#footNote').innerHTML =
-  `${esc(DOC.title)} · ${PROMPTS.length} prompts · ${DOC.evidence.length} evidence passages · ${TX.sections.reduce((n, s) => n + s.entries.length, 0)} interview answers.<br>`
-  + `Sources: ${DOC.sources.map(esc).join(' · ')}. Drafts you write here stay in this browser.`;
-route();
+// Boot is handled by workspace.js after the reflection workspace is installed.
