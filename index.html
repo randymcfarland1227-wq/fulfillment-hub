@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fulfillment &amp; Meaning</title>
+<meta name="description" content="Randy McFarland's fulfillment and meaning hub — the life, the people, and the place.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============================ AMBIENT SCENE ============================ -->
+<div class="scene" aria-hidden="true">
+  <div class="scene-sky"></div>
+  <div class="scene-glow"></div>
+  <canvas class="scene-motes" id="motes"></canvas>
+  <div class="scene-layer scene-far"></div>
+  <div class="scene-layer scene-mid"></div>
+  <div class="scene-layer scene-near"></div>
+  <div class="scene-fog scene-fog-a"></div>
+  <div class="scene-fog scene-fog-b"></div>
+</div>
+
+<!-- ================================ HEADER =============================== -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#/horizon">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><use href="#i-brand"/></svg>
+      </span>
+      <span class="brand-text">
+        <strong>Fulfillment &amp; Meaning</strong>
+        <em>the life, the people, the place</em>
+      </span>
+    </a>
+    <div class="top-actions">
+      <button class="icon-btn" id="searchBtn" title="Search everything (/)" aria-label="Search">
+        <svg viewBox="0 0 24 24"><use href="#i-search"/></svg>
+      </button>
+      <button class="icon-btn" id="themeBtn" title="Switch light / dark" aria-label="Switch theme">
+        <svg viewBox="0 0 24 24"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap nav-scroll">
+    <nav class="nav" id="nav">
+      <a href="#/horizon"      data-view="horizon">Horizon</a>
+      <a href="#/paths"        data-view="paths">The Three Paths</a>
+      <a href="#/threads"      data-view="threads">Threads</a>
+      <a href="#/evidence"     data-view="evidence">Evidence</a>
+      <a href="#/conversation" data-view="conversation">Conversation</a>
+      <a href="#/open"         data-view="open">Open Questions</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main"></main>
+
+<footer class="wrap foot">
+  <p id="footNote"></p>
+</footer>
+
+<!-- ========================== EVIDENCE DRAWER ============================ -->
+<div class="drawer-scrim" id="drawerScrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Evidence passage">
+  <div class="drawer-head">
+    <div>
+      <span class="eyebrow" id="drawerEyebrow">Evidence</span>
+      <h2 id="drawerTitle"></h2>
+    </div>
+    <button class="icon-btn" id="drawerClose" aria-label="Close">
+      <svg viewBox="0 0 24 24"><use href="#i-x"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<!-- ========================== COMMAND PALETTE ============================ -->
+<div class="palette-scrim" id="paletteScrim" hidden>
+  <div class="palette" role="dialog" aria-label="Search">
+    <div class="palette-input">
+      <svg viewBox="0 0 24 24" class="palette-icon"><use href="#i-search"/></svg>
+      <input id="paletteInput" type="search" placeholder="Search prompts, answers, passages, questions…" autocomplete="off" spellcheck="false">
+      <kbd>esc</kbd>
+    </div>
+    <div class="palette-results" id="paletteResults"></div>
+  </div>
+</div>
+
+<!-- ================================ ICONS =============================== -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-brand" viewBox="0 0 40 40">
+    <path d="M6 34h28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M13 34V16l5-5 5 5v18" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
+    <path d="M30 34V12l-4 3v19" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
+    <path d="M8 34c0-6 2-9 2-9s2 3 2 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+    <circle cx="18" cy="21" r="1.4" fill="currentColor"/>
+    <circle cx="18" cy="27" r="1.4" fill="currentColor"/>
+  </symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
