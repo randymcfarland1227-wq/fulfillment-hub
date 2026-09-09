@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fulfillment &amp; Meaning</title>
+<meta name="color-scheme" content="dark light">
 <meta name="description" content="Randy McFarland's fulfillment and meaning hub — the life, the people, and the place.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=book-1">
+<link rel="stylesheet" href="css/styles.css?v=os-1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -19,12 +20,9 @@
   <div class="scene-arch"></div>
   <div class="scene-came"></div>
   <div class="scene-glow"></div>
-  <canvas class="scene-motes" id="motes"></canvas>
   <div class="scene-layer scene-far"></div>
   <div class="scene-layer scene-mid"></div>
   <div class="scene-layer scene-near"></div>
-  <div class="scene-fog scene-fog-a"></div>
-  <div class="scene-fog scene-fog-b"></div>
 </div>
 
 <!-- ================================ HEADER =============================== -->
@@ -49,24 +47,7 @@
     </div>
   </div>
   <div class="wrap nav-scroll">
-    <nav class="nav" id="nav">
-      <a href="#/contents" data-view="contents">Contents</a>
-
-      <span class="nav-part">The Books</span>
-      <a href="#/creed"                 data-view="creed">The Creed</a>
-      <a href="#/paths/life"            data-view="paths" data-book="life">Life &amp; Purpose</a>
-      <a href="#/paths/relationships"   data-view="paths" data-book="relationships">Relationships &amp; Belonging</a>
-      <a href="#/paths/location"        data-view="paths" data-book="location">Place</a>
-
-      <span class="nav-part">Commentary</span>
-      <a href="#/threads"      data-view="threads">Patterns &amp; Tensions</a>
-      <a href="#/evidence"     data-view="evidence">Testimony</a>
-      <a href="#/conversation" data-view="conversation">The Conversation</a>
-
-      <span class="nav-part">Appendix</span>
-      <a href="#/open"    data-view="open">What Remains Open</a>
-      <a href="#/writing" data-view="writing">My Notes</a>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Sections"></nav>
   </div>
 </header>
 
@@ -126,7 +107,8 @@
 </svg>
 
 <script src="js/data.js"></script>
-<script src="js/app.js?v=book-1"></script>
-<script src="js/book.js?v=book-1"></script>
+<script src="js/taxonomy.js?v=os-1"></script>
+<script src="js/app.js?v=os-1"></script>
+<script src="js/views.js?v=os-1"></script>
 </body>
 </html>

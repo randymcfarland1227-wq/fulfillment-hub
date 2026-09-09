@@ -1,128 +1,81 @@
 # Fulfillment & Meaning
 
+A personal operating system for one life. Not a survey, not a workbook — a living,
+searchable, evidence-backed map that turns reflection into understanding and
+understanding into criteria for real decisions.
 
-## Structure
+**REFLECT → UNDERSTAND → DESIGN**
+
+## Files
 
 ```
-index.html        shell: header, nav, ambient scene, evidence drawer, search palette
-css/styles.css    the ENTIRE visual system — one file, on purpose
-js/book.js        the book: its contents, divisions and pages
-img/              the five plates (see img/README.md)
-js/data.js        GENERATED — all content as one `DATA` object
-js/app.js         the engine: data index, drafts, drawer, search palette, the window
-tools/build_data.py   regenerates js/data.js from the source documents
-server.py         local preview on http://localhost:8944
+index.html          shell: sidebar, ambient window, evidence drawer, command palette
+css/styles.css      the ENTIRE visual system — one file, on purpose
+js/data.js          GENERATED source material (376 entries, 61 passages, 66 answers)
+js/taxonomy.js      the knowledge layer — Life Map, patterns, definitions, criteria
+js/app.js           the engine — index, storage, search, derivations
+js/views.js         every page, the router, and all behaviour
+img/                the five plates (see img/README.md)
+tools/build_data.py regenerates js/data.js from the source Word documents
+server.py           local preview on http://localhost:8944
 ```
 
+**Add new styling to `css/styles.css`, not a new layer.** Three stacked stylesheets is
+what made an earlier version incoherent.
 
-## Writing answers
+## Architecture
 
-Every prompt carries one of three live states — **Answered**, **In progress** (there is a
-real answer already, it is only missing a named detail: a choice, ranking, frequency,
-boundary or experiment) and **Not started** (each of these says exactly what it is
-waiting for). In-progress prompts are never treated as blanks: their existing answer is
-shown under *Answered so far*, and the box below it extends rather than replaces it.
+Content is layered **Realm → Area → Chapter → Entry** rather than "question 1 of 376".
+Five realms and twenty-three areas live in `REALMS` (js/taxonomy.js); every one of the
+40 chapters is placed in exactly one area, and the engine warns in the console if a
+chapter is ever missed or double-placed.
 
-Anything typed into a prompt's box is saved in that browser under `fh.draft.<id>`
-and the prompt is re-marked **Drafted by me**. Drafted prompts drop out of the open
-queue, and **Export as Markdown** on `#/open` downloads them all so they can be
-folded back into the source document.
+| Section | |
+|---|---|
+| **Home** | Command centre: continue, Life Map depth, strongest patterns, an open question |
+| **Reflect** | Continue (session sizes) · Life Map · Reflection Library · Open Questions |
+| **Understand** | Patterns · Tensions · Non-Negotiables · Definitions · Quotes From Me · Testimony · The Conversation · Ask My Life |
+| **Design** | Ideal Life Blueprint · Decision Lab · Experiments |
+| **History** | Timeline · Then vs Now |
 
-Drafts are per-browser and are not synced anywhere.
+Every old deep link still resolves: `#/paths/life/05/L05.11` → `#/entry/L05.11`.
 
-## Regenerating the content
+## Honesty rules the code actually enforces
 
-`js/data.js` is parsed from two Word documents:
+- **Nothing is a verdict.** Pattern confidence (Strong / Emerging / Possible) describes
+  *spread* — how many separate areas and books a need recurs in — never truth.
+- **Detection is labelled as detection.** Patterns are keyword counts over the user's own
+  text. Every pattern page says so, and links to all of it.
+- **Evidence Mode** appears under every derived statement, separating *what you said*,
+  *what was detected*, *what was inferred*, and *what is still uncertain*.
+- **No scores of a person.** No fulfilment percentage, no personality label. Progress is
+  Deeply Explored / Developing / Early Exploration / Not Yet Explored.
+- **Frequency ≠ importance.** Non-negotiables surface as unrated candidates; only the user
+  sets importance.
+- **Nothing is overwritten.** `draft` is what is being typed; `versions` are committed
+  snapshots. Autosave only ever touches the draft, so a keystroke cannot rewrite history.
 
-- `~/Documents/Codex/2026-09-08/referenced-chatgpt-conversation-this-is-an/outputs/Fulfillment_and_Identity.docx`
-- `~/Downloads/Fulfillment_Discovery_Full_QA_Transcript.docx`
+## Writing
+
+Autosaves continuously to `localStorage` on that device only. Answers can be marked
+Answered, saved as a New Version, flagged **Core Reflection** or **This Changed**, or set
+aside as **I Don't Know Yet** / **Come Back Later** — skipping is never punished. Dictation
+appears where the browser supports speech recognition.
+
+Export JSON (everything) or Markdown (the writing) from **Your Data**; restore from a
+backup there too.
+
+## Regenerating the source material
 
 ```bash
 python3 tools/build_data.py
 ```
 
-It prints a sanity line (books / modules / prompts / evidence / status counts) —
-those should match the totals stated inside the summary document itself
-(376 prompts: 117 answered in substance, 173 partial → shown as *in progress*, 86 unanswered → shown as *not started*). Paths are constants at the
-top of the script. `js/data.js` can also just be hand-edited; the site only reads `DATA`.
+It prints a sanity line that must match the totals stated in the summary document itself:
+376 entries — 117 answered, 173 partial (*In Progress*), 86 unanswered (*Not Started*).
 
 ## Preview
 
 ```bash
 python3 server.py
 ```
-
-Then open http://localhost:8944.
-
-## Publishing
-
-Same as the other hubs — push this folder to a GitHub repo and turn on GitHub Pages
-(Settings → Pages → deploy from branch, root). Everything is static, so nothing else
-is needed. Note that this hub contains a lot of personal material; a **private**
-repo, or keeping it local, is the safer default.
-
-
-## What this is
-
-**A reference book, not a workbook.** It is a source of truth to be consulted, not an
-activity to be completed. There is no dashboard and no "today" — the front door is a
-table of contents. Writing is still possible on every entry, but it is folded into a
-collapsed margin note rather than being the point of the page.
-
-## Structure
-
-| Route | |
-|---|---|
-| `#/contents` | Front matter: the title page, the table of contents, the standing count, and how to read it |
-| `#/creed` | **Book I · The Creed** — the six north-star statements and seven anchor phrases |
-| `#/paths/life` | **Book II · Life & Purpose** — 18 chapters in 7 named parts |
-| `#/paths/relationships` | **Book III · Relationships & Belonging** — 11 chapters in 4 parts |
-| `#/paths/location` | **Book IV · Place** — 11 chapters in 5 parts |
-| `#/threads` | **Book V · Patterns & Tensions** — 12 patterns grouped in 4, plus 10 contradictions |
-| `#/evidence` | **Book VI · Testimony** — 61 passages, grouped by which book they mostly support |
-| `#/conversation` | **Book VII · The Conversation** — the interview, by session part |
-| `#/open` | **Appendix A · What Remains Open** |
-| `#/writing` | **Appendix B · My Notes** — drafts, marked entries, backups |
-
-Every entry keeps its reference number (`L01.9`, `E13`) and every old deep link still
-resolves, including `#/paths/life/05/L05.11` and `#/evidence/E13`. `#/horizon` opens
-the contents.
-
-The named parts live in `PARTS` and `THEME_GROUPS` at the top of `js/book.js` — edit
-them freely, but every chapter number must appear exactly once per book.
-
-## Capitalisation
-
-Structural headings are Title Case, applied at render time by `titleCase()` in
-`js/book.js` — **not** baked into `js/data.js`. Source text is never transformed:
-questions, answers, passages and quotes appear exactly as recorded.
-
-## The visual system
-
-One stylesheet, `css/styles.css`. It was three (`styles` + `workspace` + `atelier`)
-overriding each other, which is exactly what made the site read as incoherent —
-so they were collapsed into a single set of tokens and components. **Add new styles
-there rather than starting another layer.**
-
-The idea is a cathedral at dusk, where the city meets the forest.
-
-- **Type** — Cormorant Garamond carries display and all long-form reading (existing
-  answers, source passages, interview replies, the writing box). Inter carries the
-  interface: nav, chips, labels, buttons, metadata.
-- **Colour** — a deep ground, lead came (`--came`), gold leaf (`--leaf`, `--gold`),
-  and jewel accents. Emerald / amber / sapphire stand for Life / Relationships /
-  Location, and the same jewels drive the status pills.
-- **Glass** — the fixed backdrop is one enormous window: a skyline dissolving into
-  conifers, came laid over the sky, a cathedral arch across the top, and a scrim so
-  type never has to fight it. The anchor card carries a two-ring rose window; each
-  workbook panel is headed by diamond quarry glazing with jewel roundels.
-- **Geometry** — everything is round. `--r-xl` 30px through `--r-sm` 10px, and every
-  control is a full pill.
-- **Both themes** — `dusk` (default) and `dawn` are complete palettes. Every colour is
-  defined as a token in both; never hard-code a hex value in a component.
-
-## Status vocabulary
-
-Four states, and the wording matters: **Answered**, **In progress** (a real answer is
-already there and only needs refining — never treat these as blanks), **Not started**
-(each says exactly what it is waiting for), and **Draft saved**.
